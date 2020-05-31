@@ -1,0 +1,30 @@
+<mat-sidenav-container class="example-container" (backdropClick)="close('backdrop')">
+
+	<mat-sidenav [opened]="false" fixedInViewport opened mode="over" position="start" class="full-container"
+		#sidenav_back (keydown.escape)="sidenav.close();sidenav_back.close();"
+		(click)="sidenav.close();sidenav_back.close();">
+
+	</mat-sidenav>
+
+	<mat-sidenav [opened]="false" fixedInViewport opened mode="over" position="end" class="full-container2" #sidenav
+		(keydown.escape)="sidenav.close();sidenav_back.close();">
+
+
+    <h3>Menu</h3>
+		<p><a routerLink="/products/0" class="button fancy-button">Products 0</a></p>
+		<p><a routerLink="/products/1" class="button fancy-button">Products 1</a></p>
+		<p><a routerLink="/products/2" class="button fancy-button">Products 2</a></p>
+		<p><a routerLink="/shipping" class="button fancy-button">Shipping</a></p>
+		<p><a routerLink="/cart" class="button fancy-button">Cart</a></p>
+
+		<p><button  mat-flat-button color="primary" (click)="sidenav.close();sidenav_back.close();">Close menu</button>
+		</p>
+
+	</mat-sidenav>
+
+
+</mat-sidenav-container>
+
+<button mat-mini-fab (click)="sidenav.open(); sidenav_back.open();" color="primary" >
+  <mat-icon>menu</mat-icon>
+</button>

@@ -1,0 +1,58 @@
+<h3>Shipping Prices</h3>
+
+<!-- <mat-progress-spinner *ngIf="loading" mode="indeterminate">
+</mat-progress-spinner> -->
+
+
+<div class="example-radio-button " *ngFor="let item of items_shipping | async; let i = index ">
+
+	<mat-checkbox  disableRipple="true" [(ngModel)]="item.checked" *ngIf="item.stages.length > 1 else loadNoCheckbox">
+		<!-- {{season}} -->
+		<div class="shipping-item main">
+			<span>{{ item.type }}</span>
+			<span>{{getSumPrice(item.stages) | currency }}</span>
+		</div>
+	</mat-checkbox>
+
+	<ng-template #loadNoCheckbox>
+		<div class="shipping-item main">
+			<span>{{ item.type }}</span>
+			<span>{{getSumPrice(item.stages) | currency }}</span>
+		</div>
+	</ng-template>
+
+	<div class=" more " [@slideVertical]="(item.checked) ? 'show' : null" *ngIf="item.stages[0].type">
+		<div class="shipping-item more" *ngFor="let stage of item.stages ">
+			<span *ngIf="stage.type">{{ stage.type }}</span>
+			<span *ngIf="stage.type">{{ stage.price | currency }}</span>
+		</div>
+	</div>
+
+</div>
+
+
+
+<!-- New -->
+
+<h3>Pick your shipping:</h3>
+<mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="yourShipping">
+
+	<mat-radio-button disableRipple="true" class="example-radio-button"
+		*ngFor="let item of items_shipping | async; let i = index " [value]="item">
+
+		<div class="shipping-item main">
+			<span>{{ item.type }}</span>
+			<span>{{getSumPrice(item.stages) | currency }}</span>
+		</div>
+
+		<div class="more" [@slideVertical]="item === yourShipping ? 'show' : null" *ngIf="item.stages[0].type">
+			<div class="shipping-item" *ngFor="let stage of item.stages ">
+				<span *ngIf="stage.type">{{ stage.type }}</span>
+				<span *ngIf="stage.type">{{ stage.price | currency }}</span>
+			</div>
+		</div>
+
+	</mat-radio-button>
+
+</mat-radio-group>
+<!-- <div>Your shipping is: {{YourShipping.type}}</div> -->

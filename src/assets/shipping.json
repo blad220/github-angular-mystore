@@ -1,0 +1,40 @@
+[
+  {
+    "type": "Overnight",
+    "stages": [
+      {
+        "type": "First",
+        "price": 15.00
+      },
+      {
+        "type": "Second",
+        "price": 10.00
+      },
+      {
+        "type": "Third",
+        "price": 0.99
+      }
+    ]
+  },
+  {
+    "type": "2-Day",
+    "stages": [
+      {
+        "type": "First",
+        "price": 5.00
+      },
+      {
+        "type": "Second",
+        "price": 4.99
+      }
+    ]
+  },
+  {
+    "type": "Postal",
+    "stages": [
+      {
+        "price": 5.00
+      }
+    ]
+  }
+]

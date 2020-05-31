@@ -1,0 +1,113 @@
+
+$primary-color: #d5d5d5;
+$shipping-item-max-width: 400px;
+.shipping-item {
+  width: 100%;
+  // min-width: 350px;
+  // max-width: 400px;
+
+}
+.main {
+  background-color: $primary-color;
+  margin-left: 0px;
+  cursor: pointer;
+  font-weight: 700 !important;
+  font-size: 16px;
+  text-transform: none;
+  width: 100%;
+  // min-width: 350px;
+  max-width: $shipping-item-max-width;
+}
+.shipping-item.main:hover {
+      background-color: #979696;
+}
+.isexpand {
+  display: none;
+}
+
+.more  {
+  padding-left: 20px;
+  overflow: hidden;
+  text-transform: none;
+  font-weight: normal !important;
+  font-size: 16px;
+  width: 100%;
+  // min-width: 350px;
+  max-width: $shipping-item-max-width;
+}
+.shipping-item  span {
+       
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 0px;
+  width: 100%;
+  // min-width: 350px;
+  max-width: $shipping-item-max-width;
+}
+.main {
+  margin-left: 0px;
+  transition: all 0.5s;
+}
+.more {
+  margin-left: 0px;
+  transition: all 0.5s;
+}
+::ng-deep .mat-checkbox-layout {
+  width: 100% !important;
+}
+::ng-deep .mat-checkbox-label {
+  width: 100% !important;
+}
+.mat-radio-checked .main {
+  background-color:#4d4d4d;
+  color:aliceblue;
+  margin-left: 10px;
+  transition: all 0.5s;
+}
+.mat-checkbox-checked .main {
+  background-color:#4d4d4d;
+  color:aliceblue;
+}
+.mat-radio-checked  .more {
+  display: block;
+  // max-height: 5000px;
+  margin-left: 10px;
+  transition: all 0.5s;
+}
+::ng-deep .mat-radio-label-content {
+  padding-left: 0px !important;
+  cursor: auto;
+  width:100%;
+}
+.mat-radio-container {
+  display: none;
+}
+::ng-deep .mat-radio-button .mat-radio-container {
+  width: 0;
+  display: none;
+}
+::ng-deep .mat-radio-container .mat-radio-outer-circle,
+::ng-deep .mat-radio-container .mat-radio-inner-circle {
+  border: none;
+  width: 0;
+  display: none;
+}
+::ng-deep .example-radio-button .mat-checkbox-inner-container {
+  border: none;
+  width: 0;
+  display: none !important;
+}
+::ng-deep .mat-checkbox-layout {
+  margin: 0px !important;
+}
+span {
+  line-height: normal;
+  // line-height: 24px;
+}

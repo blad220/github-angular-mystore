@@ -1,0 +1,29 @@
+
+.example-container {
+
+} 
+.full-container {
+  /* position: fixed; */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.644);
+}
+.full-container2 {
+  padding: 10px;
+  /* position: absolute; */
+  /* top: 0; */
+  /* bottom: 0; */
+  /* left: 0; */
+  /* right: 0; */
+  /* background-color: rgba(0, 0, 0, 0.836); */
+}
+button[mat-flat-button] {
+  width: 200px;
+}
+button[mat-mini-fab] {
+  background-color: rgba(51, 38, 228, 0.192);
+  border-radius: 0%;
+  box-shadow: none;
+}

@@ -1,0 +1,28 @@
+
+.fancy-button {
+  color: rgb(255, 255, 255);
+  /* color: rgb(0, 0, 0); */
+  background: rgba(46, 50, 71, 0.514);
+  margin-right: 10px;
+  /* box-shadow: inset 0px 0px 2px 1px rgba(0, 0, 0, 0.329); */
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.938);
+  /* align-items: flex-end; */
+  
+}
+.fancy-button i.material-icons {
+  color: rgb(255, 255, 255);
+  /* color: rgb(0, 0, 0); */
+} 
+.bar_right  {
+  display: flex; 
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/*
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+*/
