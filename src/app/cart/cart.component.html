@@ -1,0 +1,203 @@
+<div class="cart-container">
+<h3>Cart</h3>
+<p><a routerLink="/shipping">Shipping prices</a></p>
+
+<div *ngIf="!items.length" class="cart-item">
+	<span><h2>Empty. Add something to your cart.. {{items.type}}</h2></span>
+</div>
+<div class="cart-item" *ngFor="let item of items">
+	<span>{{ item.name }}</span>
+	<span>{{ item.price | currency }}</span>
+</div>
+
+<div style="width:100%;margin-bottom: 8px; max-width: 700px;">
+	<div class="cart-item" style="margin-bottom: 0px;align-items: center; ">
+		<span style="margin-right: 10px;overflow: hidden;">nameeeeeeeeeeeeeeeeeeeeeeeeeeeeee</span>
+		<span style="margin-right: 10px;">$699.00</span>
+	
+	<div style="width: 100px; background:red;display:flex;align-items: center;justify-content: center; align-self: flex-end;margin-left: auto;">
+		<div style=" background:blue;">
+      <input type="number" placeholder="1" matInput  required>
+    </div>
+		<div (click)="1" style="  background:red;">
+      <span style="font-size: 30px" class="material-icons">delete</span>
+		</div>
+	</div>
+</div>
+</div>
+<div style="width:100%;display:flex;margin-bottom: 8px;">
+	<div class="cart-item" style="margin-bottom: 0px;">
+		<span>name</span>
+		<span>$699.00</span>
+	</div>
+	<div style="width: 80px; background:none;display:flex;align-items: center;justify-content: center;">
+
+	</div>
+</div>
+<div style="width:100%;display:flex;margin-bottom: 8px;">
+	<div class="cart-item" style="margin-bottom: 0px;">
+		<span>name</span>
+		<span>$699.00</span>
+	</div>
+	<div style="width: 80px; background:none;display:flex;align-items: center;justify-content: center;">
+
+	</div>
+</div>
+	<mat-form-field>
+		<input type="number" class="form-control" matInput name="value" placeholder="Slab"
+                   [formControl]="">
+  </mat-form-field>
+
+  <p><button  mat-flat-button color="primary" >Make order</button>
+		</p>
+		<!-- <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+
+  <div>
+    <label for="name">
+      Name
+    </label>
+    <input id="name" type="text" formControlName="name">
+  </div>
+
+  <div>
+    <label for="address">
+      Address
+    </label>
+    <input id="address" type="text" formControlName="address">
+  </div>
+
+  <button class="button" type="submit">Purchase</button>
+
+</form> -->
+
+		<div class="example-container">
+
+			<mat-form-field appearance="fill">
+				<mat-label>Enter your email</mat-label>
+				<input matInput placeholder="email@example.com" [formControl]="email" required>
+				<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+			</mat-form-field>
+
+
+			<mat-form-field appearance="fill" class="example-full-width">
+				<mat-label>Telephone</mat-label>
+				<span matPrefix>+380 &nbsp;</span>
+				<input type="tel" matInput #input maxlength="8" placeholder="5555-12-34"  [formControl]="" required>
+				<mat-icon matSuffix>mode_edit</mat-icon>
+			</mat-form-field>
+
+			<!-- <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+    <mat-label>Enter some input</mat-label>
+    <input matInput #input maxlength="10" placeholder="Ex. Nougat">
+    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+  </mat-form-field> -->
+			<!-- <mat-form-field appearance="fill">
+  <mat-label>Phone number</mat-label>
+  <example-tel-input required></example-tel-input>
+  <mat-icon matSuffix>phone</mat-icon>
+  <mat-hint>Include area code</mat-hint>
+</mat-form-field> -->
+
+			<mat-form-field appearance="fill">
+				<mat-label>Name</mat-label>
+				<input matInput placeholder="Enter your Name..." [formControl]="" required>
+				<!-- <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error> -->
+			</mat-form-field>
+
+			<mat-form-field appearance="fill">
+				<mat-label>Sername</mat-label>
+				<input matInput placeholder="Enter your Sername" [formControl]="" required>
+				<!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+			</mat-form-field>
+
+			<mat-form-field appearance="fill">
+				<mat-label>Second Name</mat-label>
+				<input matInput placeholder="Enter your Second Name" [formControl]="">
+				<!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+			</mat-form-field>
+
+
+
+			<mat-form-field appearance="fill" class="example-full-width">
+				<mat-label>Address</mat-label>
+				<textarea matInput placeholder="Vinnytsia, Keletska Street, 100-24"  [formControl]="" required></textarea>
+			</mat-form-field>
+
+		</div>
+
+		<!-- <mat-form-field>
+  <mat-label>Font size</mat-label>
+  <mat-select #fontSize value="16px" (selectionChange)="triggerResize()">
+    <mat-option value="10px">10px</mat-option>
+    <mat-option value="12px">12px</mat-option>
+    <mat-option value="14px">14px</mat-option>
+    <mat-option value="16px">16px</mat-option>
+    <mat-option value="18px">18px</mat-option>
+    <mat-option value="20px">20px</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field [style.fontSize]="fontSize.value">
+  <mat-label>Autosize textarea</mat-label>
+  <textarea matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"></textarea>
+</mat-form-field> -->
+<div style="width:100%;margin-bottom: 8px; ">
+<mat-vertical-stepper linear #stepper>
+  <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+    <form [formGroup]="firstFormGroup">
+
+      <ng-template matStepLabel>Fill out your name</ng-template>
+			<mat-form-field appearance="fill">
+				<mat-label>Name</mat-label>
+				<input matInput placeholder="Enter your Name..." formControlName="firstCtrl" required>
+				<!-- <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error> -->
+			</mat-form-field>
+
+			<mat-form-field appearance="fill">
+				<mat-label>Sername</mat-label>
+				<input matInput placeholder="Enter your Sername" formControlName="firstCtrl" required>
+				<!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+			</mat-form-field>
+
+			<mat-form-field appearance="fill">
+				<mat-label>Second Name</mat-label>
+				<input matInput placeholder="Enter your Second Name" formControlName="firstCtrl">
+				<!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+			</mat-form-field>
+
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Fill out your address</ng-template>
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl"
+               required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+</div>
+
+</div>
