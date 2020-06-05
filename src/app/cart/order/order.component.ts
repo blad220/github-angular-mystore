@@ -5,7 +5,8 @@ import { take } from "rxjs/operators";
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { CartService } from "src/app/cart.service";
+import { CartService } from "../../cart.service";
+
 import { TelNumberPipe } from '../tel-number.pipe';
 
 
