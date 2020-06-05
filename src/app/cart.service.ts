@@ -8,7 +8,21 @@ export class CartService {
   constructor(private http: HttpClient) {}
 
   addToCart(product) {
-    this.items.push(product);
+    
+    var temp = this.items.indexOf(product)
+    if(temp === -1) {
+      product.col = 1;
+      this.items.push(product);
+    }
+    else {
+      this.items[temp].col = this.items[temp].col+1;
+      console.log(this.items[temp]);
+    }
+      
+  }
+
+  delFromCart(index) {
+    this.items.splice(index, 1);
   }
 
   getItems() {

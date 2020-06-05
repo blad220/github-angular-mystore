@@ -1,0 +1,24 @@
+mat-form-field {
+    margin: 10px;
+    margin-top: 25px;
+    
+  }
+  .formButton {
+    margin-left: 10px;
+    margin-top: 25px;
+  }
+  ::ng-deep .mat-step-label {
+    font-size: 1.5em;
+    white-space: normal !important;
+  }
+  ::ng-deep .mat-form-field-flex {
+    box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 4px 0 rgba(0, 0, 0, 0.14), 0 -3px 8px 0 rgba(0, 0, 0, 0.16);
+  }
+  .example-card {
+    min-width: 250px;
+    max-width: 400px;
+    width: calc(100% - 600px);
+    position: absolute;
+    right: 29px;
+    top: 0;
+  }

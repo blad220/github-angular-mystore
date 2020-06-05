@@ -20,6 +20,10 @@ import {MaterialModule} from './material-module';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { SidenavComponent } from './top-bar/sidenav/sidenav.component';
 
+import { TelNumberPipe } from './cart/tel-number.pipe';
+import { OrderComponent } from './cart/order/order.component';
+
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -33,6 +37,7 @@ import { SidenavComponent } from './top-bar/sidenav/sidenav.component';
       { path: '', component: ProductListComponent },
       { path: 'products/:productId', component: ProductDetailsComponent },
       { path: 'cart', component: CartComponent },
+      { path: 'cart/order', component: OrderComponent },
       { path: 'shipping', component: ShippingComponent },
       { path: 'sidenav', component: SidenavComponent },
     ])
@@ -46,7 +51,8 @@ import { SidenavComponent } from './top-bar/sidenav/sidenav.component';
     CartComponent,
     ShippingComponent,
     SidenavComponent,
-
+    TelNumberPipe,
+    OrderComponent,
   ],
   bootstrap: [ AppComponent ],
   providers: [CartService]

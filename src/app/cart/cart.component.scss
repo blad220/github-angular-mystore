@@ -1,0 +1,38 @@
+.cart-container {
+  min-width: 400px;
+}
+.cart-item {
+  margin-top: 8px;
+  align-items: center; 
+
+  > span {
+    width: 100%;
+    margin-right: 10px;
+    overflow: auto;
+	  overflow-wrap: break-word;
+  }
+  .cart-item-inner {
+    flex: 1 150px; 
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+
+    input[type=number]{
+      background-color: rgba(0, 0, 0, 0.096);
+      font-size: 20px;
+      min-width: 37px;
+      text-align: end;
+      border-radius: 2px;
+      margin-left: 10px;
+    }
+    .material-icons  {
+      cursor: pointer;
+      font-size: 30px;
+      color: rgb(56, 7, 7);
+      margin-left: 10px;
+    }
+  }
+}
+
