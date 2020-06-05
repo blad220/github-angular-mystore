@@ -1,117 +1,140 @@
 <!-- *ngIf="items.length"  -->
-<div style="width:100%;margin-bottom: 8px; max-width: 600px; margin: auto;">
-    <mat-vertical-stepper linear #stepper>
-        <mat-step [stepControl]="firstFormGroup">
-            <form [formGroup]="firstFormGroup">
 
-                <ng-template class="form-label-name" matStepLabel>Fill out your name: {{firstFormGroupLabelName}}
-                </ng-template>
+<div style="width:100%;margin-bottom: 8px; max-width: 1000px; margin: auto;
+display: flex;
+    flex-flow: wrap-reverse;
+">
 
-                <mat-form-field appearance="fill">
-                    <mat-label>Name</mat-label>
-                    <input matInput placeholder="Enter your Name..." formControlName="firstCtrlName" required>
-                    <mat-error *ngIf="firstCtrlName.invalid">Name wrong value</mat-error>
-                </mat-form-field>
+    <!-- <mat-grid-list cols="3" rowHeight="100%"> -->
 
-                <mat-form-field appearance="fill">
-                    <mat-label>Sername</mat-label>
-                    <input matInput placeholder="Enter your Sername" formControlName="firstCtrlSername" required>
-                    <mat-error *ngIf="firstCtrlSername.invalid">Sername wrong value</mat-error>
-                </mat-form-field>
+        <!-- <mat-grid-tile [colspan]="2" [rowspan]="1"> -->
 
-                <mat-divider></mat-divider>
+            <mat-vertical-stepper linear #stepper style="max-width: 600px; min-width: 400px; margin: auto; flex: 1;">
+                <mat-step [stepControl]="firstFormGroup">
+                    <form [formGroup]="firstFormGroup">
 
-                <mat-form-field appearance="fill">
-                    <mat-label>Enter your email</mat-label>
-                    <input matInput type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                        placeholder="email@example.com" formControlName="firstCtrlEmail" required>
-                    <mat-error *ngIf="firstCtrlEmail.invalid">Email invalid</mat-error>
-                </mat-form-field>
+                        <ng-template class="form-label-name" matStepLabel>Fill out your name:
+                            {{firstFormGroupLabelName}}
+                        </ng-template>
 
-                <mat-divider></mat-divider>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Name</mat-label>
+                            <input matInput placeholder="Enter your Name.." formControlName="firstCtrlName" required>
+                            <div class="err">Error</div>
+                            <mat-error *ngIf="firstCtrlName.invalid">Name wrong value</mat-error>
+                        </mat-form-field>
 
-                <mat-form-field appearance="fill" class="example-full-width">
-                    <mat-label>Telephone</mat-label>
-                    <input matInput #telNum type="tel" formControlName="firstCtrlTel" (focusout)="checkTel();"
-                        pattern="^[\+38]{3}\(+[0-9]{3}\)+[0-9]{3}\-[0-9]{2}\-[0-9]{2}$" maxlength="19"
-                        placeholder="+38(066)003-80-56" required>
-                    <!-- <mat-icon matSuffix>mode_edit</mat-icon> -->
-                    <mat-error *ngIf="firstCtrlTel.invalid">Mobile is wrong</mat-error>
-                </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Sername</mat-label>
+                            <input matInput placeholder="Enter your Sername.." formControlName="firstCtrlSername"
+                                required>
+                            <div class="err">Error</div>
+                            <mat-error *ngIf="firstCtrlSername.invalid">Sername wrong value</mat-error>
+                        </mat-form-field>
 
-                <mat-divider></mat-divider>
+                        <mat-divider></mat-divider>
 
-                <div class="formButton">
-                    <button mat-flat-button color="primary" matStepperNext (click)="setFirstFormLabel()">Next</button>
-                </div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                placeholder="email@example.com" formControlName="firstCtrlEmail" required>
+                            <div class="err">Error</div>
+                            <mat-error *ngIf="firstCtrlEmail.invalid">Email invalid</mat-error>
+                        </mat-form-field>
 
-            </form>
-        </mat-step>
+                        <mat-divider></mat-divider>
 
-        <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
-            <form [formGroup]="secondFormGroup">
-                <ng-template matStepLabel>Fill out your address</ng-template>
-                <mat-form-field>
-                    <mat-label>Address</mat-label>
-                    <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl" required>
-                </mat-form-field>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
-            </form>
-        </mat-step>
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Telephone</mat-label>
+                            <input matInput #telNum type="tel" formControlName="firstCtrlTel" (focusout)="checkTel();"
+                                pattern="^[\+38]{3}\(+[0-9]{3}\)+[0-9]{3}\-[0-9]{2}\-[0-9]{2}$" maxlength="19"
+                                placeholder="+38(066)003-80-56" required>
+                            <!-- <mat-icon matSuffix>mode_edit</mat-icon> -->
+                            <div class="err">Error</div>
+                            <mat-error *ngIf="firstCtrlTel.invalid">Mobile is wrong</mat-error>
+                        </mat-form-field>
 
-        <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
-            <form [formGroup]="secondFormGroup">
-                <ng-template matStepLabel>Fill out your address</ng-template>
-                <mat-form-field>
-                    <mat-label>Address</mat-label>
-                    <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl" required>
-                </mat-form-field>
-                <div>
-                    <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button matStepperNext>Next</button>
-                </div>
-            </form>
-        </mat-step>
+                        <mat-divider></mat-divider>
 
-        <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
-            <p>You are now done.</p>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button (click)="stepper.reset()">Reset</button>
-            </div>
-        </mat-step>
-    </mat-vertical-stepper>
+                        <div class="formButton">
+                            <button mat-flat-button color="primary" matStepperNext
+                                (click)="setFirstFormLabel()">Next</button>
+                        </div>
 
-    <mat-card class="example-card">
-        <mat-card-header>
-          <mat-card-title>Cart:</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-        </mat-card-header>
-    
-        <mat-card-content>
-            <div class="cart-item" *ngFor="let item of items; index as productId">
-    
-                <span>
-                    <a [title]="item.name + ' details'" [routerLink]="['/products', item.id]">{{item.name}}</a>
-                </span>
-                <span>
-                    {{item.col}}
-                </span>
-                <div class="cart-item-inner">
-                    <span>{{item.price * item.col | currency}}</span>
-                </div>
-            </div>
-            <p>Total: {{800 | currency}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button routerLink="/cart">Edit cart</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card>
+                    </form>
+                </mat-step>
 
+                <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+                    <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Fill out your address</ng-template>
+                        <mat-form-field>
+                            <mat-label>Address</mat-label>
+                            <textarea placeholder="Ex. 1 Main St, New York, NY" matInput required></textarea>
+                        </mat-form-field>
+                        <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
 
+                <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required." aria-expanded="true">
+                    <form [formGroup]="secondFormGroup">
+                        <ng-template matStepLabel>Fill out your address</ng-template>
+                        <mat-form-field>
+                            <mat-label>Address</mat-label>
+                            <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl"
+                                required>
+                        </mat-form-field>
+                        <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button matStepperNext>Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+
+                <mat-step>
+                    <ng-template matStepLabel>Done</ng-template>
+                    <p>You are now done.</p>
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button (click)="stepper.reset()">Reset</button>
+                    </div>
+                </mat-step>
+            </mat-vertical-stepper>
+
+        <!-- </mat-grid-tile> -->
+
+                <!-- <mat-grid-tile [colspan]="1" [rowspan]="1"> -->
+
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <mat-card-title>Cart:</mat-card-title>
+                            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+                        </mat-card-header>
+        
+                        <mat-card-content>
+                            <div class="cart-item" *ngFor="let item of items; index as productId">
+        
+                                <span>
+                                    <a [title]="item.name + ' details'" [routerLink]="['/products', item.id]">{{item.name}}</a>
+                                </span>
+                                <span>
+                                    {{item.col}}
+                                </span>
+                                <div class="cart-item-inner">
+                                    <span>{{item.price * item.col | currency}}</span>
+                                </div>
+                            </div>
+                            <p>Total: {{800 | currency}}</p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button routerLink="/cart">Edit cart</button>
+                            <button mat-button>SHARE</button>
+                        </mat-card-actions>
+                    </mat-card>
+        
+                <!-- </mat-grid-tile> -->
+
+    <!-- </mat-grid-list> -->
 </div>

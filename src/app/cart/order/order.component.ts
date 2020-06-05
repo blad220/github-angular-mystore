@@ -51,6 +51,15 @@ export class OrderComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
+    this.firstFormGroup.patchValue(
+      {
+        firstCtrlName: "1",
+        firstCtrlSername: "2",
+        firstCtrlEmail: "email@example.com",
+        firstCtrlTel: "+38(066)003-80-56"
+
+      }
+    );
     // if(!this.items.length) this.router.navigate(["/cart"]);
   }
 
