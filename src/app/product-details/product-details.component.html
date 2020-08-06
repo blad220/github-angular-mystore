@@ -2,7 +2,13 @@
 
 <div *ngIf="product">
 	<h3>{{ product.name }}</h3>
-	<h4>{{ product.price | currency }}</h4>
-	<p>{{ product.description }}</p>
-	<button (click)="addToCart(product)">Buy</button>
+	<div class="product-details-item-image"
+		[style]="'background-image:url(../../../assets/images/'+ product.image + ' );'"></div>
+	<div class="product-details-container-left">
+		<div class="product-details-item-price">{{ product.price | currency: 'UAH' : 'symbol-narrow' }}</div>
+
+		<button class="button-buy" (click)="addToCart(product)"><i _ngcontent-hqq-c71="" class="material-icons">shopping_cart</i>Buy</button>
+	</div>
+	<div class="product-details-description">{{ product.description }}</div>
+
 </div>

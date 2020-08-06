@@ -1,8 +1,4 @@
-
-.example-container {
-
-} 
-.full-container {
+.navbar-full-container-back {
   /* position: fixed; */
   top: 0;
   bottom: 0;
@@ -10,7 +6,7 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.644);
 }
-.full-container2 {
+.navbar-full-container-main {
   padding: 10px;
   /* position: absolute; */
   /* top: 0; */
@@ -21,9 +17,25 @@
 }
 button[mat-flat-button] {
   width: 200px;
+  margin-top: 30px;
 }
 button[mat-mini-fab] {
   background-color: rgba(51, 38, 228, 0.192);
   border-radius: 0%;
   box-shadow: none;
+}
+.button {
+  width: 100%;
+  background-color: #383e5e;
+}
+::ng-deep .navbar-full-container-back.mat-drawer {
+  opacity: 0 !important;
+  transform: none !important;
+  transition: opacity 0.5s;
+}
+::ng-deep .navbar-full-container-back.mat-drawer-opened {
+  opacity: 1 !important;
+}
+span.material-icons {
+  margin-right: 10px;
 }

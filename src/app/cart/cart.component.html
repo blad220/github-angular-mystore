@@ -15,8 +15,8 @@
 		</span>
 
 		<div class="cart-item-inner">
-			<span>{{item.price * item.col | currency}}</span>
-			<input type="number" #itemCol min=1 max=99 value="{{item.col}}" (focusout)="
+			<span class="cart-item-price">{{item.price * item.col | currency: 'UAH' : 'symbol-narrow'}}</span>
+			<input type="number" #itemCol class="cart-item-col" min=1 max=99 value="{{item.col}}" (focusout)="
 			  (itemCol.value<itemCol.min) ? itemCol.value=itemCol.min:''; 
 			  (itemCol.value>99) ? itemCol.value=itemCol.max:''; 
 			  item.col = itemCol.value;

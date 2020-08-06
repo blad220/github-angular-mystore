@@ -23,6 +23,9 @@ import { SidenavComponent } from './top-bar/sidenav/sidenav.component';
 import { TelNumberPipe } from './cart/tel-number.pipe';
 import { OrderComponent } from './cart/order/order.component';
 
+// import { MatFormFieldModule, MatSelectModule } from '@angular/material';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+
 
 @NgModule({
   imports: [
@@ -33,14 +36,16 @@ import { OrderComponent } from './cart/order/order.component';
     MaterialModule,
     BrowserAnimationsModule,
     MatNativeDateModule,
+    NgxMatSelectSearchModule,
     RouterModule.forRoot([
-      { path: '', component: ProductListComponent },
-      { path: 'products/:productId', component: ProductDetailsComponent },
-      { path: 'cart', component: CartComponent },
-      { path: 'cart/order', component: OrderComponent },
-      { path: 'shipping', component: ShippingComponent },
-      { path: 'sidenav', component: SidenavComponent },
-    ])
+      { path: '', component: ProductListComponent, data:{state: 'home'} },
+      { path: 'products/:productId', component: ProductDetailsComponent, data:{state: 'products'},},
+        // children:[{path: ':productId', component: ProductDetailsComponent, data:{state: 'products'}}] },
+      { path: 'cart', component: CartComponent, data:{state: 'cart'} },
+      { path: 'cart/order', component: OrderComponent, data:{state: 'order'} },
+      { path: 'shipping', component: ShippingComponent, data:{state: 'shipping'} },
+      { path: 'sidenav', component: SidenavComponent, data:{state: 'sidenav'} },
+    ]),
   ],
   declarations: [
     AppComponent,

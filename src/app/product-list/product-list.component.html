@@ -1,21 +1,29 @@
 <h2>Products</h2>
-<div *ngFor="let product of products; index as productId">
+<div class="product-list-container">
+<div class="product-list-item" *ngFor="let product of products; index as productId">
 	<h3>
 		<a [title]="product.name + ' details'" [routerLink]="['/products', productId]">
 			{{ product.name }}
 		</a>
 	</h3>
+	<div class="product-list-item-image" [style]="'background-image:url(../../../assets/images/'+ product.image + ' );'">
+	<!-- <img [src]="'/src/assets/images/' + product.image"> -->
+	<div class="product-list-item-container-buttons">
+		<button (click)="share(product)">Share</button>
+		<app-product-alerts [product]="product" (notify)="onNotify(product)"></app-product-alerts>
+		<button class="button-buy" (click)="addToCart(product)"><i _ngcontent-hqq-c71="" class="material-icons">shopping_cart</i>Buy</button>
+	</div>
+	</div>
 
-	<p *ngIf="product.description">
+	<!-- <p style="clear: both;" *ngIf="product.description">
 		Description: {{ product.description }}
-	</p>
+	</p> -->
+	<div class="product-list-item-price" *ngIf="product.price">
+		{{ product.price | currency: 'UAH' : 'symbol-narrow' }}
+	</div>
 
-	<button (click)="share(product)">
-    Share
-  </button>
-
-	<app-product-alerts [product]="product" (notify)="onNotify(product)">
-	</app-product-alerts>
+	
+</div>
 </div>
 <!-- 
 Copyright Google LLC. All Rights Reserved.

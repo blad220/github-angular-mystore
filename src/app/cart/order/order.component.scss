@@ -1,48 +1,66 @@
-mat-form-field {
-    margin: 10px;
-    margin-top: 25px;
+@import '../cart.component.scss';
+// @import '../../shipping/shipping.component.scss';
+$form-field-width: 204px;
+$form-field-margin: 10px;
+
+.order-container {
+  width:100%;
+  margin-bottom: 8px; 
+  max-width: 1000px; 
+  margin: auto;
+  display: flex;
+  flex-flow: wrap-reverse;
+  
+  mat-vertical-stepper {
+    max-width: 501px; 
+    min-width: 400px; 
+    margin: auto; 
+    margin-top: 20px;
+    flex: 1;
     
+    mat-form-field {
+      margin: $form-field-margin;
+      // margin-top: 25px;
+      vertical-align: top;
+      width: $form-field-width;
+    }
+    mat-form-field.adressFormGroup {
+      width: 100%;
+      min-width: $form-field-width;
+      max-width: $form-field-width * 2 + $form-field-margin * 2;
+    }
+    
+    .formButton {
+      margin: 10px 10px 0 10px;
+      // margin-top: 25px;
+    }
   }
-  .formButton {
-    margin-left: 10px;
-    margin-top: 25px;
-  }
-  ::ng-deep .mat-step-label {
-    font-size: 1.5em;
-    white-space: normal !important;
-  }
-  ::ng-deep .mat-form-field-flex {
-    box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 4px 0 rgba(0, 0, 0, 0.14), 0 -3px 8px 0 rgba(0, 0, 0, 0.16);
-  }
-  .example-card {
+}
+
+.example-card {
     max-width: 400px;
     min-width: 300px;
-    /* right: 29px; */
-    /* top: 0; */
-    z-index: 3;
+    z-index: 1;
     height: fit-content;
     margin: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-left: 20px;
     flex: 1;
     position: sticky;
     top: 10px;
+
+    @media (max-width: 780px) {
+      position: unset;
+      margin-left: auto;
+      max-width: 500px;
+    }
+
+    button {
+      font-size: 16px;
+    }
   }
 
   .err {
-    // width: 117px;
-    // text-align: center;
-    // padding: 5px;
-    // position: absolute;
-    // right: -130px; 
-    // top: -9px;
-    // transform: rotateZ(90deg);
-    // background-color: #f35247;;
-    // transition: all 1s;
-    // color: #f5f5f5;
-    // box-shadow: 0 0px 7px 1px rgba(0, 0, 0, 0.78);
-    // opacity: 0;
-
     width: 125px;
     /* height: 0px; */
     text-align: center;
@@ -58,21 +76,37 @@ mat-form-field {
     color: #ffffff;
     box-shadow: inset 0 0px 2px 1px rgba(0, 0, 0, 0.43);
     opacity: 0;
+    backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     overflow: hidden;
     // mix-blend-mode: luminosity;
     z-index: 1;
     user-select: none;
+    
+  }
+  ::ng-deep .mat-step-header {
+    margin-bottom: 10px;
+    text-overflow: ellipsis;
+  }
+  ::ng-deep .mat-step-label {
+    font-size: 1.5em;
+    white-space: normal !important;
+  }
+  ::ng-deep .mat-form-field-invalid {
+    margin: 10px 10px 0 10px !important;
+  }
+  ::ng-deep .mat-form-field-flex {
+    box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 0px 4px 0 rgba(0, 0, 0, 0.14), 0 -3px 8px 0 rgba(0, 0, 0, 0.16);
+    background-color: rgba(0,0,0,.04);
+
+    border-radius: 4px 4px 0 0;
+    padding: .75em .75em 0 .75em;
   }
   ::ng-deep .mat-form-field-invalid.mat-focused .err{
     right: -51px;
     opacity: 0;
   }
   ::ng-deep .mat-form-field-invalid .err{
-    // transform: rotateZ(55deg);
-    // right: -31px;
-    // opacity: 1;
-
     transform: rotateZ(44deg) scaleY(1);
     right: -41px;
     opacity: 1;
@@ -83,3 +117,74 @@ mat-form-field {
   ::ng-deep .mat-form-field-flex {
     overflow: hidden;
   }
+  ::ng-deep .mat-option-text {
+    display: flex !important;
+    flex-grow: 0 !important;
+    overflow: unset !important;
+    // text-overflow: ellipsis;
+    .order-shipping-logo {
+      width: 25px;
+      height: 25px;
+      float: left;
+      margin: auto;
+      margin-right: 7px;
+      flex: none;
+      background-size: cover;
+    }
+    .order-shipping-logo.delivery {
+      background-image: url(../../../assets/images/logoDelivery.png);
+    }
+    .order-shipping-logo.novaPoshta {
+      background-image: url(../../../assets/images/logoNovaposta.png);
+    }
+  }
+  mat-error {
+    font-size: 14px;
+  }
+mat-divider {
+  margin: 10px;
+  width: 100%;
+  min-width: 204px;
+  max-width: 428px;
+}
+.cart-item{
+  .cart-item-inner {
+    min-width: 125px;
+  }
+}
+::ng-deep mat-form-field {
+  textarea {
+    // background-color: red;
+  }
+  // .mat-form-field-flex {
+  //   padding: 10px;
+  // }
+  .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+  }
+
+}
+::ng-deep .cdk-virtual-scroll-content-wrapper {
+  width: inherit;
+}
+::ng-deep .mat-form-field-subscript-wrapper[ng-reflect-ng-switch="error"] {
+  position: unset;
+  padding-left: 1em;
+}
+
+::ng-deep .mat-select-search-no-entries-found {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+::ng-deep .mat-option[aria-disabled=true].contains-mat-select-search.mat-select-search-no-entries-found {
+  height: auto !important;
+}
+::ng-deep .cdk-overlay-backdrop-showing {
+  background-color: rgba(0, 0, 0, 0.644);
+  opacity: 1 !important;
+}
+::ng-deep .cdk-overlay-backdrop-hiding {
+  background-color: rgba(0, 0, 0, 0.0);
+  opacity: 0 !important;
+}

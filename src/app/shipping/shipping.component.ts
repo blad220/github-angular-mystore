@@ -1,9 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit, Output, EventEmitter } from "@angular/core";
 import { CartService } from "../cart.service";
 import {animate,state,style,transition,trigger} from "@angular/animations";
 
 // import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ProgressSpinnerMode } from "@angular/material/progress-spinner";
+// import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
+import { retry } from 'rxjs/operators';
+
 @Component({
   selector: "app-shipping",
   templateUrl: "./shipping.component.html",
@@ -28,33 +32,56 @@ import { ProgressSpinnerMode } from "@angular/material/progress-spinner";
 })
 export class ShippingComponent implements OnInit {
   items_shipping;
-  items_shipping_stages;
-  shippingCosts;
+  // items_shipping_stages;
+  // shippingCosts;
 
   loading: boolean = false;
+  
+  constructor(private cartService: CartService, private _formBuilder: FormBuilder) {}
 
-  objectKeys = Object.keys;
-
-  constructor(private cartService: CartService) {}
   yourShipping: string;
-  // seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
+
+  @Input() shippingInfo = 'info';
+  @Input() shippingCost= {Cost: 0, AssessedCost: 0};
+  @Input() shippingHave:{"nNovaPoshta":boolean, "nDelivery":boolean};
+
+  @Output() private onFormGroupChange = new EventEmitter<any>();
+
+  shippingForm = new FormControl('', [Validators.required]);
+  
   ngOnInit() {
+
+    this.onFormGroupChange.emit(this.shippingForm);
+
     this.loading = true;
+
     this.cartService.getShippingPrices().subscribe(res => {
-      // let stage;
       this.items_shipping = this.cartService.getShippingPrices();
-      // this.items_shipping_stages = this.items_shipping.stages;
-      // console.log(this.items_shipping);
       this.loading = false;
     });
-    // this.items_shipping = this.cartService.getShippingPrices();
+  }
+  getPriceOfShip(item) {
+    if(item.type === "Novaposhta" ){
+      return this.shippingCost.Cost;
+    }
+    return 0;
+  }
+  ifDisabled(item) {
+    if (this.shippingHave !== undefined) {
+    if(item.type === "Delivery") {
+      return !this.shippingHave.nDelivery;
+    }
+    if(item.type === "Novaposhta" ){
+      return !this.shippingHave.nNovaPoshta;
+    }
+    if(item.type === "Another" ){
+      return false;
+    }
+  }
+    return true;
   }
   getSumPrice(items): number {
-    let sum = 0;
-    for (let i = 0; i < items.length; i++) {
-      sum += items[i].price;
-    }
-    return sum;
+    return this.cartService.getSumPrice(items);
   }
   log(a) {
     console.log(a);

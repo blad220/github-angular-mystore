@@ -1,6 +1,6 @@
 [
   {
-    "type": "Overnight",
+    "type": "Delivery",
     "stages": [
       {
         "type": "First",
@@ -17,7 +17,7 @@
     ]
   },
   {
-    "type": "2-Day",
+    "type": "Novaposhta",
     "stages": [
       {
         "type": "First",
@@ -30,10 +30,11 @@
     ]
   },
   {
-    "type": "Postal",
+    
+    "type": "Another",
     "stages": [
       {
-        "price": 5.00
+        "price": 0.00
       }
     ]
   }

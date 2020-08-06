@@ -61,7 +61,16 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
             }
+            
           }
         },
         "serve": {
@@ -72,6 +81,10 @@
           "configurations": {
             "production": {
               "browserTarget": "Ang-Test:build:production"
+            },
+            "hmr": {
+              "hmr": true,
+              "browserTarget": "Ang-Test:build:hmr"
             }
           }
         },

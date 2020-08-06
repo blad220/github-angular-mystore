@@ -1,11 +1,16 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpParams   } from "@angular/common/http";
+
+import {  throwError } from 'rxjs';
+import { retry, catchError, tap } from 'rxjs/operators';
 
 @Injectable()
 export class CartService {
   items = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    
+  }
 
   addToCart(product) {
     
@@ -33,8 +38,20 @@ export class CartService {
     this.items = [];
     return this.items;
   }
-
+  allPrice() {
+    return this.getSumPrice(this.getItems());
+  }
+  getSumPrice(sumItems): number {
+    let sum = 0;
+    for (let i = 0; i < sumItems.length; i++) {
+      if(!sumItems[i].col) sumItems[i].col = 1;
+      sum += sumItems[i].price * sumItems[i].col;
+    }
+    return sum;
+  }
   getShippingPrices() {
     return this.http.get("./assets/shipping.json");
   }
+
+
 }
