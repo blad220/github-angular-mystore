@@ -1,0 +1,41 @@
+[
+  {
+    "type": "Delivery",
+    "stages": [
+      {
+        "type": "First",
+        "price": 15.00
+      },
+      {
+        "type": "Second",
+        "price": 10.00
+      },
+      {
+        "type": "Third",
+        "price": 0.99
+      }
+    ]
+  },
+  {
+    "type": "Novaposhta",
+    "stages": [
+      {
+        "type": "First",
+        "price": 5.00
+      },
+      {
+        "type": "Second",
+        "price": 4.99
+      }
+    ]
+  },
+  {
+    
+    "type": "Another",
+    "stages": [
+      {
+        "price": 0.00
+      }
+    ]
+  }
+]
