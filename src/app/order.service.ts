@@ -5,7 +5,7 @@ import { throwError, Observable, Subject } from 'rxjs';
 import { retry, catchError, tap, publishReplay, refCount } from 'rxjs/operators';
 import { shareReplay, map } from 'rxjs/operators';
 
-import { NovaPoshtaSettings, NovaPoshtaResponse, NovaPoshta, DeliverySettings, DeliveryResponse, Delivery, NovaPoshtaResponsePrice, NovaPoshtaResponsePriceAll } from './cart/order/deliverysettings';
+import { NovaPoshtaSettings, NovaPoshtaResponse, NovaPoshta, DeliverySettings, DeliveryResponse, Delivery, NovaPoshtaResponsePrice, NovaPoshtaResponsePriceAll, DeliveryResponsePrice, DeliveryResponsePriceAll } from './cart/order/deliverysettings';
 import { CartService } from "../app/cart.service";
 
 
@@ -35,8 +35,6 @@ export class OrderService {
       "data": "{\r\n\"apiKey\": \"\",\r\n \"modelName\": \"Address\",\r\n \"calledMethod\": \"searchSettlements\",\r\n \"methodProperties\": {\r\n \"CityName\": \"васильевка\",\r\n \"Limit\": 5\r\n }\r\n}"
     };
     return this.http.get(settings.url, settings);
-    // console.log(this.http.post(settings.url, settings));
-    // console.log(this.http.get("./assets/shipping.json"));
   }
 
   public first: string = "";
@@ -120,18 +118,8 @@ export class OrderService {
     return this._instanceCache.get(key);
   }
 
-  //  API_ENDPOINT = 'https://api.icndb.com/jokes/random/5?limitTo=[nerdy]';
   CACHE_SIZE = 1;
-  //  private cache$: Observable<NovaPoshta>;
-  // get jokes() {
-  // if (!this.cache$) {
-  //   this.cache$ = this.requestJokes().pipe(
-  //     shareReplay(this.CACHE_SIZE)
-  //   );
-  // }
 
-  // return this.cache$;
-  // }
   private cacheNovaPoshta$: Observable<Array<NovaPoshtaResponse>>;
   private reloadNovaPoshta$ = new Subject<void>();
 
@@ -226,32 +214,116 @@ export class OrderService {
     "Cost": 100,
 
 }
-  // Helper method to actually fetch the jokes
+  // Helper method to actually fetch the NovaPoshtaPrice
   requestNovaPoshtaPrice(temp) {
     
-    var tmp4 = {};
-    // console.log(tmp);
-    
     var tmp2 = Object.assign({}, this.settingsNovaPoshta.price.methodProperties, temp);
-    var tmpAll = Object.assign({}, this.settingsNovaPoshta.price, tmp2);
 
     this.settingsNovaPoshta.price.methodProperties = tmp2;
     this.settingsNovaPoshta.price.methodProperties.Cost = this.cartService.allPrice();
 
-    // tmp3.methodProperties.CityRecipient  = temp.CityRecipient;
-    console.log("TMP------->");
-    console.log(temp);
-    console.log(this.settingsNovaPoshta.price);
-    // console.log(tmpAll);
-    // console.log(tmp2);
-    // console.log(this.settingsNovaPoshta.price);
-    // console.log(tmp2);
     return this.http.post<NovaPoshtaResponsePriceAll>(this.settingsNovaPoshta.REST_API_SERVER, this.settingsNovaPoshta.price).pipe(
       map(response => response.data)
     );
   }
 
+  
+//--------------------------------------------------------------------------------------
 
+
+  private cacheDeliveryPrice$: Observable<Array<DeliveryResponsePrice>>;
+  private reloadDeliveryPrice$ = new Subject<void>();
+
+  deliveryPrice(temp) {
+    // console.log('deliveryPrice GO');
+    if (!this.cacheDeliveryPrice$) {
+
+      // console.log('deliveryPrice request GO');
+    
+      this.cacheDeliveryPrice$ = this.requestDeliveryPrice(temp).pipe(
+        shareReplay(this.CACHE_SIZE)
+      );
+    }
+
+    return this.cacheDeliveryPrice$;
+  }
+  // Public facing API to force the cache to reload the data
+  forceReloadDeliveryPrice(temp) {
+    // var tmp2 = Object.assign({}, this.settingsNovaPoshta.price.methodProperties, temp);
+    // this.tmpAll = Object.assign({}, this.settingsNovaPoshta.price, tmp2);
+
+    console.log(temp);
+    this.reloadDeliveryPrice$.next();
+    this.cacheDeliveryPrice$ = null;
+    this.deliveryPrice(temp);
+
+  }
+  clearReloadDeliveryPrice() {
+    this.reloadDeliveryPrice$.next();
+    // this.cache$ = null;
+  }
+
+  // Helper method to actually fetch the jokes
+  requestDeliveryPrice(temp) {
+    
+    var tmp4 = {};
+    // console.log(tmp);
+    
+    var tmp2 = Object.assign({}, this.deliverySettings.price, temp);
+    // var Delivery = Object.assign({}, this.settingsNovaPoshta.price, tmp2);
+
+    this.deliverySettings.price = tmp2;
+    // this.settingsNovaPoshta.price.methodProperties.Cost = this.cartService.allPrice();
+
+
+    console.log("TMP---DeliveryPrice---->");
+    console.log(temp);
+    console.log(this.deliverySettings.price);
+
+    console.log("GET WAREHOUSE-------------");
+    var wareHouse;
+    var wareHouseReady = false;
+    // console.log(this.http.get(this.deliverySettings.REST_API_SERVER_WAREHOUSES+temp.id));
+
+
+
+    // this.requestDeliveryWarehouses(temp.areasResiveId)
+    // .pipe(
+    //   map(response => wareHouseReady = true)
+    // )
+    // .subscribe(
+    //   data => {
+    //     wareHouse = data;
+    //     console.log(data);
+        
+    //   }
+    // );
+    if(wareHouseReady) {
+    this.deliverySettings.price.warehouseResiveId = wareHouse.data[0].id;
+    console.log("WWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+
+    console.log(wareHouse.data[0].id);
+    }
+    return this.http.post<DeliveryResponsePriceAll>(this.deliverySettings.REST_API_SERVER_Price, this.deliverySettings.price).pipe(
+      map(response => response.data)
+    );
+  }
+  // private cacheDeliveryWarehouses: Observable<Array<NovaPoshtaResponsePrice>>;
+  requestDeliveryWarehouses(tmp) {
+    return this.http.get(this.deliverySettings.REST_API_SERVER_WAREHOUSES + tmp);
+  }
+  requestDeliveryWarehouses2(tmp) {
+    this.deliverySettings.price.warehouseResiveId = tmp;
+
+    this.deliverySettings.price.CashOnDeliveryValue = this.cartService.allPrice();
+    this.deliverySettings.price.InsuranceValue = this.cartService.allPrice();
+    console.log("WWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+
+    console.log(this.deliverySettings.price);
+    return this.http.post<DeliveryResponsePriceAll>(this.deliverySettings.REST_API_SERVER_Price, this.deliverySettings.price).pipe(
+      map(response => response.data)
+    );
+  }
   
 }
 

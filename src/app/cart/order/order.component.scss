@@ -13,19 +13,22 @@ $form-field-margin: 10px;
   
   mat-vertical-stepper {
     max-width: 501px; 
-    min-width: 400px; 
+    // min-width: 400px; 
     margin: auto; 
     margin-top: 20px;
     flex: 1;
+    width: inherit;
+    font-size: 90%;
     
     mat-form-field {
       margin: $form-field-margin;
       // margin-top: 25px;
       vertical-align: top;
-      width: $form-field-width;
+      // width: $form-field-width;
+      width: 100%;
     }
     mat-form-field.adressFormGroup {
-      width: 100%;
+      // width: 100%;
       min-width: $form-field-width;
       max-width: $form-field-width * 2 + $form-field-margin * 2;
     }
@@ -132,10 +135,10 @@ $form-field-margin: 10px;
       background-size: cover;
     }
     .order-shipping-logo.delivery {
-      background-image: url(../../../assets/images/logoDelivery.png);
+      background-image: url(../../../assets/images/logoDelivery.webp);
     }
     .order-shipping-logo.novaPoshta {
-      background-image: url(../../../assets/images/logoNovaposta.png);
+      background-image: url(../../../assets/images/logoNovaposta.webp);
     }
   }
   mat-error {
@@ -167,8 +170,8 @@ mat-divider {
 ::ng-deep .cdk-virtual-scroll-content-wrapper {
   width: inherit;
 }
-::ng-deep .mat-form-field-subscript-wrapper[ng-reflect-ng-switch="error"] {
-  position: unset;
+::ng-deep .mat-form-field-subscript-wrapper {
+  position: unset !important;
   padding-left: 1em;
 }
 

@@ -1,7 +1,14 @@
-<h2>Product Details</h2>
 
-<div *ngIf="product">
-	<h3>{{ product.name }}</h3>
+<div class="content" *ngIf="product">
+	<h2>Product Details</h2>
+
+	<h3>{{ product.name }}
+		<span class="material-icons" [cdkCopyToClipboard]="product.name" 
+		matTooltip="Copy to clipboard"
+		matTooltipPosition="right"
+		(click)="copyToClipboard()"
+		>content_copy</span>
+	</h3>
 	<div class="product-details-item-image"
 		[style]="'background-image:url(../../../assets/images/'+ product.image + ' );'"></div>
 	<div class="product-details-container-left">

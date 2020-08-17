@@ -1,17 +1,18 @@
 <div class="containerOuter">
-<app-top-bar>
-</app-top-bar>
+
+	<app-top-bar>
+	</app-top-bar>
+
+	<div class="container" #mainContainer [@routerAnimations]="getState(routerOutlet)">
+
+		<router-outlet class="main" (activate)="onActivate(mainContainer)" #routerOutlet="outlet">
+		</router-outlet>
+		<div  style="grid-area: empty;"></div>
+		<div class="footer">
+			<div class="footer-item">Vlad Sliusar - 2020</div>
+		</div>
+	</div>
 
 
-<div class="container" [@routerAnimations]="getState(routerOutlet)">
-  
-	<router-outlet #routerOutlet="outlet"></router-outlet>
-	
+
 </div>
-
-</div>
-<!-- 
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
--->

@@ -7,7 +7,7 @@ import { CartService } from "../cart.service";
 @Component({
   selector: "app-product-details",
   templateUrl: "./product-details.component.html",
-  styleUrls: ["./product-details.component.css"]
+  styleUrls: ["./product-details.component.scss"]
 })
 export class ProductDetailsComponent implements OnInit {
   product;
@@ -17,7 +17,9 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
   addToCart(product) {
     this.cartService.addToCart(product);
-    window.alert('Your product has been added to the cart!');
+  }
+  copyToClipboard() {
+    this.cartService.copyToClipboard();
   }
   ngOnInit() {
     this.route.paramMap.subscribe(params => {

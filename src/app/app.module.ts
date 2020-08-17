@@ -23,9 +23,9 @@ import { SidenavComponent } from './top-bar/sidenav/sidenav.component';
 import { TelNumberPipe } from './cart/tel-number.pipe';
 import { OrderComponent } from './cart/order/order.component';
 
-// import { MatFormFieldModule, MatSelectModule } from '@angular/material';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
+import { AuthGuard } from './cart/order/auth.guard';
 
 @NgModule({
   imports: [
@@ -39,13 +39,14 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     NgxMatSelectSearchModule,
     RouterModule.forRoot([
       { path: '', component: ProductListComponent, data:{state: 'home'} },
-      { path: 'products/:productId', component: ProductDetailsComponent, data:{state: 'products'},},
+      { path: 'products/:productId',  component: ProductDetailsComponent, data:{state: 'products'},},
+      // { path: '', redirectTo: '/#top', pathMatch: 'prefix',},
         // children:[{path: ':productId', component: ProductDetailsComponent, data:{state: 'products'}}] },
       { path: 'cart', component: CartComponent, data:{state: 'cart'} },
-      { path: 'cart/order', component: OrderComponent, data:{state: 'order'} },
+      { path: 'cart/order', component: OrderComponent, canActivate: [AuthGuard], data:{state: 'order'} },
       { path: 'shipping', component: ShippingComponent, data:{state: 'shipping'} },
       { path: 'sidenav', component: SidenavComponent, data:{state: 'sidenav'} },
-    ]),
+    ], ),
   ],
   declarations: [
     AppComponent,
@@ -64,9 +65,3 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 })
 export class AppModule { }
 
-
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at http://angular.io/license
-*/

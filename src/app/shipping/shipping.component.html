@@ -59,13 +59,18 @@
 	<!-- <form [formGroup]="shippingForm"> -->
 <mat-radio-group *ngIf="shippingInfo==='choose' || shippingInfo==='all'" aria-labelledby="example-radio-group-label"
 	class="example-radio-group" required [formControl]="shippingForm">
+	<h2 style="margin-top: 0px;">Shipping from Vinnytsia warehouse to..</h2>
+
 	<h2 style="margin-top: 0px;">Pick your shipping:</h2>
 
-	<mat-radio-button value="{{item.type}}" [disabled]="ifDisabled(item)" *ngFor="let item of items_shipping | async; let i = index " disableRipple="true" class="example-radio-button">
+	<mat-radio-button value="{{getPriceOfShipAll(item)}}" [disabled]="ifDisabled(item)" *ngFor="let item of items_shipping | async; let i = index " disableRipple="true" class="example-radio-button">
 
 		<div class="shipping-item main">
 			<span>{{item.type}}</span>
-			<span>{{getPriceOfShip(item) | currency: 'UAH' : 'symbol-narrow' }}</span>
+			<!-- <span><mat-spinner diameter=15 ></mat-spinner></span> -->
+			<span>{{(getPriceOfShip(item) !== -1) ? (getPriceOfShip(item) | currency: 'UAH' : 'symbol-narrow') : '' }}</span>
+			<span *ngIf="(getPriceOfShip(item) === -1)"><mat-spinner diameter=15></mat-spinner></span>
+
 		</div>
 
 		<!-- <div class="more" [@slideVertical]="item === yourShipping ? 'show' : null" *ngIf="item.stages[0].type">

@@ -42,7 +42,14 @@ export class ShippingComponent implements OnInit {
   yourShipping: string;
 
   @Input() shippingInfo = 'info';
-  @Input() shippingCost= {Cost: 0, AssessedCost: 0};
+  @Input() shippingCost= {    
+    novaPoshta : {
+      Cost: 0, AssessedCost: 0 ,
+    },
+    delivery : {
+      allSumma: 0,
+    }
+  };
   @Input() shippingHave:{"nNovaPoshta":boolean, "nDelivery":boolean};
 
   @Output() private onFormGroupChange = new EventEmitter<any>();
@@ -62,9 +69,23 @@ export class ShippingComponent implements OnInit {
   }
   getPriceOfShip(item) {
     if(item.type === "Novaposhta" ){
-      return this.shippingCost.Cost;
+      return this.shippingCost.novaPoshta.Cost;
+    }
+    if(item.type === "Delivery" ){
+      return this.shippingCost.delivery.allSumma;
     }
     return 0;
+  }
+  getPriceOfShipAll(item) {
+    // var temp: {
+    //   'name': string,
+    //   'cost': number
+    // } = {
+    //   'name': item.type,
+    //   'cost': this.getPriceOfShip(item)
+    // };
+    var temp = item.type + " (₴" + this.getPriceOfShip(item) + ")";
+    return temp;
   }
   ifDisabled(item) {
     if (this.shippingHave !== undefined) {

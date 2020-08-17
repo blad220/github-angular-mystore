@@ -1,17 +1,6 @@
-<!-- *ngIf="items.length"  -->
-<!-- <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"  style="  height: 200px;
-width: 200px;
-border: 1px solid black;">
-    <div *cdkVirtualFor="let item of ds" style="height: 50px;">{{item || 'Loading...'}}</div>
-  </cdk-virtual-scroll-viewport> -->
 <div class="order-container">
-
-    <!-- <mat-grid-list cols="3" rowHeight="100%"> -->
-
-    <!-- <mat-grid-tile [colspan]="2" [rowspan]="1"> -->
-
     <mat-vertical-stepper linear #stepper>
-        <mat-step [stepControl]="firstFormGroup" completed>
+        <mat-step [stepControl]="firstFormGroup" >
             <form [formGroup]="firstFormGroup">
 
                 <ng-template class="form-label-name" matStepLabel>
@@ -57,22 +46,6 @@ border: 1px solid black;">
                 </mat-form-field>
 
                 <mat-divider></mat-divider>
-
-
-                <!-- <h4>native html select</h4>
-                <mat-form-field class="example-full-width">
-                  <mat-label>Choose one</mat-label>
-                  <select matNativeControl formControlName="nativeSelectFormControl"  [errorStateMatcher]="matcher">
-                    <option value=""></option>
-                    <option value="valid" selected>Valid option</option>
-                    <option value="invalid">Invalid option</option>
-                  </select>
-                  <mat-error *ngIf="firstFormGroup.controls['nativeSelectFormControl'].hasError('required')">You must make a selection</mat-error>
-                  <mat-error *ngIf="firstFormGroup.controls['nativeSelectFormControl'].hasError('pattern') && !nativeSelectFormControl.hasError('required')">
-                    Your selection is invalid
-                  </mat-error>
-                </mat-form-field> -->
-                <!-- <div *ngIf="!unionMassiveCompanyT">Loading</div> -->
                 
                 <mat-form-field *ngIf="!unionMassiveCompanyT" class="example-full-width adressFormGroup">
                     <mat-label>Loading...</mat-label>
@@ -93,8 +66,6 @@ border: 1px solid black;">
                         <mat-option style="height: 0px;" *ngIf="selected" [value]="selected">{{selected.nShortName}}
                         </mat-option>
                         <div style="overflow: auto; ">
-                            <!-- <mat-option value="">None</mat-option> -->
-
 
                             <cdk-virtual-scroll-viewport itemSize="30" style="  height: 200px; width: 100%;">
                                 <mat-option [title]="((item.Description) ? item.Description : item.name) + 
@@ -110,22 +81,10 @@ border: 1px solid black;">
                                 </mat-option>
                             </cdk-virtual-scroll-viewport>
 
-                            <!-- <cdk-virtual-scroll-viewport itemSize="50" style="  height: 200px;
-                    width: 200px;
-                    border: 1px solid black;">
-                        <div *cdkVirtualFor="let item of ds" style="height: 50px;">{{item || 'Loading...'}}</div>
-                      </cdk-virtual-scroll-viewport> -->
-
-                            <!-- <mat-option *ngFor="let item of filteredServerSideNovaPoshta | async" [value]="item"> -->
-                            <!-- {{item.Description}} -->
-                            <!-- </mat-option> -->
-
                         </div>
 
-
-                        <!-- <mat-option value="valid">Valid option</mat-option> -->
-                        <!-- <mat-option value="invalid">Invalid option</mat-option> -->
                     </mat-select>
+                    <div class="err">Error</div>
                     <mat-error *ngIf="firstFormGroup.controls['firstCtrlCity'].hasError('required')">You must make a
                         selection</mat-error>
                     <mat-error
@@ -133,56 +92,6 @@ border: 1px solid black;">
                         Your selection is invalid
                     </mat-error>
                 </mat-form-field>
-                <!-- <p>
-                    Selected Bank: {{firstFormGroup.controls['bankServerSideCtrl'].value?.name}}
-                  </p> -->
-
-
-                <!-- <mat-form-field class="example-full-width" style="width: 85%;" appearance="fill">
-                    <mat-label>City</mat-label>
-                    <input style="padding: 5px;" matInput placeholder="City of delivery"
-                        formControlName="firstCtrlCity" (keyup)="getCity()" required>
-                    <mat-error *ngIf="firstFormGroup.controls['firstCtrlCity'].errors">
-                        {{firstFormGroup.controls['firstCtrlCity'].errors['myNameValidator']}}</mat-error>
-                    <mat-error *ngIf="receivedTmpDisplay !== undefined && receivedTmpDisplay.errors">{{receivedTmpDisplay.errors}}</mat-error>
-                    
-                        
-                        <mat-divider></mat-divider>
-                        <mat-error *ngIf="firstCtrlCity.invalid">City is wrong</mat-error>
-                        <mat-error >{{receivedTmp.success}}</mat-error>
-
-                        
-
-                        
-                        <div [@slideVertical]="receivedTmpDisplay !== undefined && receivedTmpDisplay.success && showCity ? 'show' : null">
-                    <div style="overflow: hidden;" 
-                        *ngFor="let item of jokesNovaPoshta$  | async">
-                        <div class="cart-item" style="cursor: pointer;" 
-                            (click)="chooseCity(item)">
-
-                            <img class="example-option-img" aria-hidden [src]="" height="25">
-                            <span style="justify-content: start;" class="cart-item-inner">
-                                {{item | json}}
-                            </span>
-                            
-
-                   
-                        </div>
-
-                        
-                        
-                       
-                    </div>
-                </div>
-                    
-
-                    <div class="err">Error</div>
-                     -->
-                <!-- <mat-error *ngIf="firstCtrlCity.invalid">City is wrong</mat-error> -->
-
-
-                <!-- </mat-form-field> -->
-                <!-- <mat-error >{{receivedTmp.errors}}</mat-error> -->
 
                 <mat-divider></mat-divider>
 
@@ -193,22 +102,11 @@ border: 1px solid black;">
             </form>
         </mat-step>
 
-        <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required." completed>
+        <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
             <form [formGroup]="secondFormGroup">
                 <ng-template matStepLabel>{{setSecondFormLabel()}}</ng-template>
-
-                <!-- <p *ngIf="formCheck">{{formCheck.controls['thirdCtrl'].value}}</p> -->
-
-                <!-- <mat-form-field>
-                            <mat-label>Address</mat-label>
-                            <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="thirdCtrl"
-                                required>
-                        </mat-form-field> -->
-                <!-- selected.nNovaPoshta -->
-                <!-- selected.nDelivery -->
-                <app-shipping shippingInfo=choose [(shippingCost)]="priceNovaPoshta" [(shippingHave)]="selected"
+                <app-shipping shippingInfo=choose [(shippingCost)]="priceShipping" [(shippingHave)]="selected"
                     (onFormGroupChange)="onFormGroupChangeEvent($event)"></app-shipping>
-                <!-- <mat-error *ngIf="secondFormGroup.invalid">Pick your shipping</mat-error> -->
                 <div>
                     <button class="formButton" mat-flat-button color="primary" matStepperPrevious>Back</button>
                     <button class="formButton" mat-flat-button color="primary" matStepperNext>Next</button>
@@ -216,7 +114,7 @@ border: 1px solid black;">
             </form>
         </mat-step>
 
-        <mat-step [stepControl]="thirdFormGroup" errorMessage="Address is required." aria-expanded="true" completed>
+        <mat-step [stepControl]="thirdFormGroup" errorMessage="Address is required." aria-expanded="true" >
             <form [formGroup]="thirdFormGroup">
                 <ng-template matStepLabel>{{setThirdFormLabel()}}</ng-template>
                 <mat-form-field class="adressFormGroup">
@@ -226,10 +124,6 @@ border: 1px solid black;">
                     <div class="err">Error</div>
                     <mat-error *ngIf="thirdCtrlAdress.invalid">Address is required</mat-error>
                 </mat-form-field>
-                <div class="cart-item" *ngFor="let item of DeliveryCitys();">
-                    <span *ngIf="!item.error">{{item.Present}}</span>
-                    <span *ngIf="item.error">{{item.error}}</span>
-                </div>
 
                 <mat-divider></mat-divider>
 
@@ -241,10 +135,10 @@ border: 1px solid black;">
         </mat-step>
 
         <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
             <mat-card>
-                <mat-card-header>
-                    <ng-template matStepLabel>Done</ng-template>
-                </mat-card-header>
+
+                <mat-card-header></mat-card-header>
                 <p>You are now done.</p>
                 <mat-card-content>
                     <p>{{this.firstFormGroup.value | json}}</p>
@@ -253,20 +147,16 @@ border: 1px solid black;">
                 </mat-card-content>
 
                 <mat-card-actions>
-                    <!-- <p>{{this.thirdFormGroup.value | json}}</p> -->
                     <div>
                         <button class="formButton" mat-flat-button color="primary" matStepperPrevious>Back</button>
                         <button class="formButton" mat-flat-button color="primary"
                             (click)="stepper.reset()">Reset</button>
                     </div>
                 </mat-card-actions>
+
             </mat-card>
         </mat-step>
     </mat-vertical-stepper>
-
-    <!-- </mat-grid-tile> -->
-
-    <!-- <mat-grid-tile [colspan]="1" [rowspan]="1"> -->
 
     <mat-card class="example-card">
         <mat-card-header>
@@ -296,45 +186,7 @@ border: 1px solid black;">
             <!-- <button mat-button (click)="getLog()">SHARE</button> -->
         </mat-card-actions>
 
-
-        <!-- {{DeliveryCity()}} -->
-        <!-- {{receivedTmp2.data[0].Addresses[0].DeliveryCity}} -->
-
-
-
-        <!-- {{DeliveryCity() | json}} -->
-
-
-
-
     </mat-card>
 
-    <!-- </mat-grid-tile> -->
 
-    <!-- </mat-grid-list> -->
 </div>
-
-<!-- <mat-card *ngFor="let item of jokesNovaPoshta$ | async">
-    
-    <div  class="joke-content flex">
-      <span class="vote">{{50 }}</span>
-      <span class="stretch" [innerHTML]="item.Description"></span>
-      <button mat-icon-button>
-        <mat-icon class="heart" aria-label="Like">favorite</mat-icon>
-      </button>
-    </div>
-
-  </mat-card> -->
-
-<!-- <div class="example-radio-button " *ngFor="let item of items_shipping | async; let i = index ">
-    <div class="shipping-item main">
-        <span>{{ item.type }}</span>
-        <span>{{getSumPrice(item.stages) | currency }}</span>
-    </div>
-    <div class=" more ">
-		<div class="shipping-item more" *ngFor="let stage of item.stages ">
-			<span *ngIf="stage.type">{{ stage.type }}</span>
-			<span *ngIf="stage.type">{{ stage.price | currency }}</span>
-		</div>
-    </div>
-</div> -->
