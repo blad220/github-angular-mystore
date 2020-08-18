@@ -196,7 +196,6 @@ export class OrderService {
     var tmp2 = Object.assign({}, this.settingsNovaPoshta.price.methodProperties, temp);
     this.tmpAll = Object.assign({}, this.settingsNovaPoshta.price, tmp2);
 
-    console.log(temp);
     this.reloadNovaPoshtaPrice$.next();
     this.cacheNovaPoshtaPrice$ = null;
     this.novaPoshtaPrice(temp);
@@ -252,7 +251,7 @@ export class OrderService {
     // var tmp2 = Object.assign({}, this.settingsNovaPoshta.price.methodProperties, temp);
     // this.tmpAll = Object.assign({}, this.settingsNovaPoshta.price, tmp2);
 
-    console.log(temp);
+    // console.log(temp);
     this.reloadDeliveryPrice$.next();
     this.cacheDeliveryPrice$ = null;
     this.deliveryPrice(temp);
@@ -275,34 +274,12 @@ export class OrderService {
     this.deliverySettings.price = tmp2;
     // this.settingsNovaPoshta.price.methodProperties.Cost = this.cartService.allPrice();
 
-
-    console.log("TMP---DeliveryPrice---->");
-    console.log(temp);
-    console.log(this.deliverySettings.price);
-
-    console.log("GET WAREHOUSE-------------");
     var wareHouse;
     var wareHouseReady = false;
-    // console.log(this.http.get(this.deliverySettings.REST_API_SERVER_WAREHOUSES+temp.id));
 
-
-
-    // this.requestDeliveryWarehouses(temp.areasResiveId)
-    // .pipe(
-    //   map(response => wareHouseReady = true)
-    // )
-    // .subscribe(
-    //   data => {
-    //     wareHouse = data;
-    //     console.log(data);
-        
-    //   }
-    // );
     if(wareHouseReady) {
     this.deliverySettings.price.warehouseResiveId = wareHouse.data[0].id;
-    console.log("WWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-
-    console.log(wareHouse.data[0].id);
+ 
     }
     return this.http.post<DeliveryResponsePriceAll>(this.deliverySettings.REST_API_SERVER_Price, this.deliverySettings.price).pipe(
       map(response => response.data)
@@ -317,9 +294,7 @@ export class OrderService {
 
     this.deliverySettings.price.CashOnDeliveryValue = this.cartService.allPrice();
     this.deliverySettings.price.InsuranceValue = this.cartService.allPrice();
-    console.log("WWWWWWWWWWWWWWWWWWWWWWWWWWWW");
 
-    console.log(this.deliverySettings.price);
     return this.http.post<DeliveryResponsePriceAll>(this.deliverySettings.REST_API_SERVER_Price, this.deliverySettings.price).pipe(
       map(response => response.data)
     );

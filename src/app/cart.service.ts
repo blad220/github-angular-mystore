@@ -75,7 +75,7 @@ export class CartService {
 
   readonly _onDestroy = new Subject<void>();
   ngOnDestroy() {
-    console.log("Destroy Cart Service");
+    // console.log("Destroy Cart Service");
     if (this.colAllChange) {
       this.colAllChange.unsubscribe();
       this.colAllChange = null;

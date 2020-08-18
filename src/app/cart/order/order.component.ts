@@ -13,7 +13,7 @@ import { TelNumberPipe } from '../tel-number.pipe';
 import { NovaPoshta, NovaPoshtaResponse, Delivery, DeliveryResponse, NovaPoshtaResponsePrice, DeliveryResponsePriceAll, DeliveryResponsePrice } from './deliverysettings';
 import { animate, state, style, transition, trigger } from "@angular/animations";
 
-import { take, tap, debounceTime, map, delay, mergeMap, shareReplay } from "rxjs/operators";
+import { take, tap, debounceTime, map, delay, mergeMap, shareReplay, isEmpty } from "rxjs/operators";
 import {
   Observable, ReplaySubject, Subject, SubscriptionLike, merge, forkJoin
 } from 'rxjs';
@@ -220,14 +220,14 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
     //Delivery
     this.jokesDeliveryPrice$.pipe(takeUntil(this._onDestroy))
       .subscribe(data => {
-        console.log(data);
+        // console.log(data);
 
         if (data[0]) {
           this.priceDelivery = data[0];
-          console.log("dataFinalDelivery");
-          console.log(data);
+          // console.log("dataFinalDelivery");
+          // console.log(data);
         }
-        console.log("End-jokesDeliveryPrice");
+        // console.log("End-jokesDeliveryPrice");
       });
 
     this.firstCtrlCityFilteringCtrl.valueChanges
@@ -237,25 +237,27 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
         map(search => {
 
           if (!this.unionMassiveCompanyT) {
-            console.log(this.unionMassiveCompanyT);
+            // console.log(this.unionMassiveCompanyT);
             return [];
           }
-
+         
           return this.unionMassiveCompanyT.filter(resp => resp.nShortName.toLowerCase().indexOf(search.toLowerCase()) > -1);
 
         }),
         delay(500),
         takeUntil(this._onDestroy)
       )
-      .subscribe(filteredBanks => {
+      .subscribe(filtered => {
         this.searching = false;
         if (this.townSelectOpen) {
-          var _cachedData = Array.from<string>({ length: filteredBanks.length });
+          var _cachedData = Array.from<string>({ length: filtered.length });
           this._dataStream = new BehaviorSubject<(string | undefined)[]>(_cachedData);
-          for (let i = 0; i < filteredBanks.length; i++) {
-            filteredBanks[i].indexId = i;
+          for (let i = 0; i < filtered.length; i++) {
+            filtered[i].indexId = i;
           }
-          this._dataStream.next(filteredBanks);
+          if(!filtered.length) this.searchNoneBool=true;
+          else this.searchNoneBool=false;
+          this._dataStream.next(filtered);
         }
       },
         error => {
@@ -265,6 +267,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
+  searchNoneBool = false;
   priceShipping = {
     novaPoshta: {
       Cost: 0, AssessedCost: 0,
@@ -327,10 +330,6 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
     requestDeliveryWarehouses.pipe(
       mergeMap((resNovaPoshta) => {
         this.priceShipping.delivery.allSumma = -1;
-        console.log("==========33333===============");
-        console.log(resNovaPoshta['data'][0].id);
-        // argMassiveNovaPoshta = resNovaPoshta;
-        // filteredServerSideNovaPoshta.next(resNovaPoshta);
         return this.orderService.requestDeliveryWarehouses2(resNovaPoshta['data'][0].id);
       }),
     )
@@ -544,11 +543,6 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
 
     var objMass = [];
 
-    // this.objectAll.areas[0].areas
-    // this.objectNova.areas
-    // let objectAll:NovaPoshtaResponse[] = this.argMassiveNovaPoshta;
-    // let objectNova:DeliveryResponse[] = this.argMassiveDelivery;
-    // .toString().trim().replace(/\s\(.*?\)/g, '')
 
     let arrayAll = Array.from(tempArgMass1, ({ Description }) => Description);
     // let arrayAll => tempArgMass1.Description
@@ -570,7 +564,6 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
     //   arrayNova[i] = arrayNova[i].toString().trim().replace(/\(.*?\)|\s\(.*?\)|\./g, '');
     // }
     for (let i = 0; i < tempArgMass2.length; i++) {
-      // arrayNova[i] = arrayNova[i].toString().trim().replace(/\(.*?\)|\s\(.*?\)|\./g, '');
       objMass2.push({
         "nShortName": tempArgMass2[i].name.toString().trim().replace(/\(.*?\)|\s\(.*?\)|\./g, ''),
         "nDelivery": true,
@@ -671,8 +664,6 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
   searchCity;
   selected;
   townSelectOpen = true;
-  // _cachedData = Array.from<NovaPoshtaResponse>({length: 1});
-  // _dataStream = new BehaviorSubject<NovaPoshtaResponse[]>(this._cachedData);
 
   menuOpened() {
     // console.log("Opened");
@@ -684,7 +675,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
       this.firstCtrlCityFilteringCtrl.setValue("", { emitEvent: true });
 
     var tempSelected = this.selected;
-    this.selected = undefined;
+    // this.selected = undefined;
     this.firstFormGroup.controls['firstCtrlCity'].setValue(tempSelected);
 
     var indexSelect = this.firstFormGroup.controls['firstCtrlCity'].value || undefined;
@@ -697,7 +688,7 @@ export class OrderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
   menuClosed() {
-    console.log("closed");
+    // console.log("closed");
     this.townSelectOpen = false;
 
     this.selected = this.firstFormGroup.controls['firstCtrlCity'].value;

@@ -49,10 +49,11 @@
                 
                 <mat-form-field *ngIf="!unionMassiveCompanyT" class="example-full-width adressFormGroup">
                     <mat-label>Loading...</mat-label>
-                    <mat-select  formControlName="firstCtrlCity" (opened)="menuOpened()" (closed)="menuClosed()"
+                    <mat-select  formControlName="firstCtrlCity" 
                         #singleSelect required>
                     </mat-select>
                 </mat-form-field>
+                
                 <mat-form-field *ngIf="unionMassiveCompanyT" class="example-full-width adressFormGroup">
                     <mat-label>{{(unionMassiveCompanyT) ? 'Town' : 'Loading...'}}</mat-label>
                     <mat-select formControlName="firstCtrlCity" (opened)="menuOpened()" (closed)="menuClosed()" 
@@ -60,18 +61,18 @@
 
                         <mat-option style="text-overflow: ellipsis;">
                             <ngx-mat-select-search [formControl]="firstCtrlCityFilteringCtrl" [searching]="searching"
-                                placeholderLabel="Find Town..." noEntriesFoundLabel="No matching Town found..">
+                                placeholderLabel="Find Town..." [noEntriesFoundLabel]="null">
                             </ngx-mat-select-search>
                         </mat-option>
-                        <mat-option style="height: 0px;" *ngIf="selected" [value]="selected">{{selected.nShortName}}
-                        </mat-option>
-                        <div style="overflow: auto; ">
 
+                        
+                        <div style="overflow: auto; ">
+                            <!-- temSize="30" -->
                             <cdk-virtual-scroll-viewport itemSize="30" style="  height: 200px; width: 100%;">
                                 <mat-option [title]="((item.Description) ? item.Description : item.name) + 
                                 ((item.nNovaPoshta) ? ' | Novaposta' : '' ) +
                                 ((item.nDelivery) ? ' | Delivery' : '' )"
-                                    *cdkVirtualFor="let item of _dataStream, let i = index" style="height: 50px;"
+                                    *cdkVirtualFor="let item of _dataStream, let i = index" class="town-virtual-scroll-item" 
                                     [value]="item">
                                 <div *ngIf="(item.nNovaPoshta)" class="order-shipping-logo novaPoshta"></div>
                                 <div *ngIf="(item.nDelivery)" class="order-shipping-logo delivery"></div>    
@@ -79,10 +80,16 @@
                                 ((item.Description) ? item.Description : item.name) 
                             }}
                                 </mat-option>
+                            
+                                <div *ngIf="searchNoneBool" class="noSearchLabel">
+                                    No matching Town found..
+                                </div>
+             
                             </cdk-virtual-scroll-viewport>
 
                         </div>
-
+                        <mat-option style="height: 0px;" *ngIf="selected" [value]="selected">{{((selected.Description) ? selected.Description : selected.name) }}
+                        </mat-option>
                     </mat-select>
                     <div class="err">Error</div>
                     <mat-error *ngIf="firstFormGroup.controls['firstCtrlCity'].hasError('required')">You must make a

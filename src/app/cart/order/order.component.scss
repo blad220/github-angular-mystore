@@ -1,5 +1,6 @@
 @import '../cart.component.scss';
-// @import '../../shipping/shipping.component.scss';
+@import "../../viewMix.Devices.scss";
+
 $form-field-width: 204px;
 $form-field-margin: 10px;
 
@@ -39,7 +40,48 @@ $form-field-margin: 10px;
     }
   }
 }
+.town-virtual-scroll-item {
+  height: 50px;
+}
 
+.noSearchLabel {
+  padding: 16px;
+  color: rgba(0,0,0,.38);
+}
+::ng-deep .mat-select-search-inner.mat-typography.mat-datepicker-content.mat-tab-header {
+  @media (min-width: 576px) {
+    width: unset;
+  }
+  @media (max-width: 576px) {
+    width: 100% !important;
+  }
+}
+::ng-deep .mat-select-panel.mat-primary.mat-select-search-panel {
+  @media (min-width: 576px) {
+    min-width: unset;
+  }
+  @media (max-width: 576px) {
+    min-width: 100% !important;
+  }
+}
+
+
+
+::ng-deep .cdk-overlay-pane.cdk-overlay-pane-select-search {
+  
+  @media (min-width: 576px) {
+    width: unset ;
+    left: unset ;
+    top: unset ;
+  }
+  @media (max-width: 576px) {
+    width: 90% !important;
+    left: 5% !important;
+    top: 70px !important;
+    bottom: unset !important;
+    transform: none !important;
+  }
+}
 .example-card {
     max-width: 400px;
     min-width: 300px;
@@ -86,6 +128,10 @@ $form-field-margin: 10px;
     z-index: 1;
     user-select: none;
     
+  }
+  ::ng-deep button.mat-select-search-clear {
+    box-shadow: none;
+    top: 0px !important;
   }
   ::ng-deep .mat-step-header {
     margin-bottom: 10px;
