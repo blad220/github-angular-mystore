@@ -141,7 +141,7 @@ export class OrderService {
     this.reloadNovaPoshta$.next();
     // this.cache$ = null;
   }
-  // Helper method to actually fetch the jokes
+  // Helper method to actually fetch
   requestNovaPoshta() {
     return this.http.post<NovaPoshta>(this.settingsNovaPoshta.REST_API_SERVER, this.settingsNovaPoshta.options).pipe(
       map(response => response.data)
@@ -170,7 +170,7 @@ export class OrderService {
     this.reloadDelivery$.next();
     // this.cache$ = null;
   }
-  // Helper method to actually fetch the jokes
+  // Helper method to actually fetch
   requestDelivery() {
     return this.http.get<Delivery>(this.deliverySettings.REST_API_SERVER).pipe(
       map(response => response.data)
@@ -193,9 +193,7 @@ export class OrderService {
   }
   // Public facing API to force the cache to reload the data
   forceReloadNovaPoshtaPrice(temp) {
-    var tmp2 = Object.assign({}, this.settingsNovaPoshta.price.methodProperties, temp);
-    this.tmpAll = Object.assign({}, this.settingsNovaPoshta.price, tmp2);
-
+   
     this.reloadNovaPoshtaPrice$.next();
     this.cacheNovaPoshtaPrice$ = null;
     this.novaPoshtaPrice(temp);
@@ -205,7 +203,7 @@ export class OrderService {
     this.reloadNovaPoshtaPrice$.next();
     // this.cache$ = null;
   }
-  tmpAll;
+
   tmp = {
   
     // "CityRecipient": this.firstFormGroup.controls['firstCtrlCity'].value.Ref,
@@ -262,7 +260,7 @@ export class OrderService {
     // this.cache$ = null;
   }
 
-  // Helper method to actually fetch the jokes
+  // Helper method to actually fetch
   requestDeliveryPrice(temp) {
     
     var tmp4 = {};
@@ -285,15 +283,16 @@ export class OrderService {
       map(response => response.data)
     );
   }
-  // private cacheDeliveryWarehouses: Observable<Array<NovaPoshtaResponsePrice>>;
-  requestDeliveryWarehouses(tmp) {
-    return this.http.get(this.deliverySettings.REST_API_SERVER_WAREHOUSES + tmp);
+  
+  requestDeliveryWarehouses(WarehouseId: string) {
+    return this.http.get(this.deliverySettings.REST_API_SERVER_WAREHOUSES + WarehouseId);
   }
-  requestDeliveryWarehouses2(tmp) {
-    this.deliverySettings.price.warehouseResiveId = tmp;
 
-    this.deliverySettings.price.CashOnDeliveryValue = this.cartService.allPrice();
-    this.deliverySettings.price.InsuranceValue = this.cartService.allPrice();
+  requestDeliveryPriceWarehouses(tmp:{'warehouseResiveId': string, 'CashOnDeliveryValue': number, 'InsuranceValue': number, }) {
+    this.deliverySettings.price.warehouseResiveId = tmp.warehouseResiveId;
+
+    this.deliverySettings.price.CashOnDeliveryValue = tmp.CashOnDeliveryValue;
+    this.deliverySettings.price.InsuranceValue = tmp.InsuranceValue;
 
     return this.http.post<DeliveryResponsePriceAll>(this.deliverySettings.REST_API_SERVER_Price, this.deliverySettings.price).pipe(
       map(response => response.data)

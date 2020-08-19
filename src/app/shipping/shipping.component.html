@@ -59,9 +59,9 @@
 	<!-- <form [formGroup]="shippingForm"> -->
 <mat-radio-group *ngIf="shippingInfo==='choose' || shippingInfo==='all'" aria-labelledby="example-radio-group-label"
 	class="example-radio-group" required [formControl]="shippingForm">
-	<h2 style="margin-top: 0px;">Shipping from Vinnytsia warehouse to..</h2>
+	<h2 class="backAcent">Shipping from Vinnytsia warehouse with..</h2>
 
-	<h2 style="margin-top: 0px;">Pick your shipping:</h2>
+	<h2>Pick your shipping:</h2>
 
 	<mat-radio-button value="{{getPriceOfShipAll(item)}}" [disabled]="ifDisabled(item)" *ngFor="let item of items_shipping | async; let i = index " disableRipple="true" class="example-radio-button">
 

@@ -47,15 +47,15 @@
 
                 <mat-divider></mat-divider>
                 
-                <mat-form-field *ngIf="!unionMassiveCompanyT" class="example-full-width adressFormGroup">
+                <mat-form-field *ngIf="!fieldTownReadyBool" class="example-full-width adressFormGroup">
                     <mat-label>Loading...</mat-label>
                     <mat-select  formControlName="firstCtrlCity" 
                         #singleSelect required>
                     </mat-select>
                 </mat-form-field>
                 
-                <mat-form-field *ngIf="unionMassiveCompanyT" class="example-full-width adressFormGroup">
-                    <mat-label>{{(unionMassiveCompanyT) ? 'Town' : 'Loading...'}}</mat-label>
+                <mat-form-field *ngIf="fieldTownReadyBool" class="example-full-width adressFormGroup">
+                    <mat-label>{{(fieldTownReadyBool) ? 'Town' : 'Loading...'}}</mat-label>
                     <mat-select formControlName="firstCtrlCity" (opened)="menuOpened()" (closed)="menuClosed()" 
                         (selectionChange)="townSelectChange()" #singleSelect required>
 
